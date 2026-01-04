@@ -5,6 +5,7 @@ __pycache__/
 credentials.json
 chroma_db/
 *.txt
+!requirements.txt
 test_*.py
 node_modules/
 frontend/node_modules/
