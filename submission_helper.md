@@ -26,9 +26,9 @@ Here are the details you can copy and paste directly into the submission form.
 ## 5. GitHub Repository Link
 You will need to push your current code to GitHub.
 *   **Step 1:** Create a new repository on GitHub.
-*   **Step 2:** Run `git remote add origin <your-repo-link>` in your terminal.
+*   **Step 2:** Run `git remote add origin https://github.com/nithishganesan25/CareerFlow.git` in your terminal.
 *   **Step 3:** Run `git push -u origin main`.
-*   [Paste your link here]
+*   Link: https://github.com/nithishganesan25/CareerFlow.git
 
 ## 6. MVP Link
 *   **Option A (Fastest):** Use **Ngrok** to expose your local server temporarily.
