@@ -1,0 +1,13 @@
+.env
+venv
+thumbnail.png
+__pycache__/
+credentials.json
+chroma_db/
+*.txt
+test_*.py
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+.DS_Store
