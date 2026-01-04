@@ -23,6 +23,10 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 app = FastAPI()
 
+@app.get("/")
+def root():
+    return {"message": "API is running"}
+
 # --- SECURITY ENHANCEMENTS ---
 app.add_middleware(
     CORSMiddleware,
