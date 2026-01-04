@@ -27,6 +27,8 @@ import axios from 'axios';
 import Login from './Login';
 import { auth, logOut, onAuthChange, updateUserProfile } from './firebase';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8001';
+
 // Mock data to enrich the company cards (simulating the design)
 const COMPANIES = [
     { name: 'TCS', category: 'Service', color: 'from-orange-200 to-orange-100' },
@@ -91,7 +93,7 @@ function App() {
             setAiCitations([]);
             setShowSuggestions(false);
             try {
-                const res = await axios.post('http://localhost:8001/ask-ai', { query: searchQuery });
+                const res = await axios.post(`${API_BASE_URL}/ask-ai`, { query: searchQuery });
                 setAiAnswer(res.data.answer);
                 setAiCitations(res.data.citations || []);
             } catch (err) {
@@ -135,7 +137,7 @@ function App() {
         setSelectedCompany(name);
         setView('company');
         try {
-            const res = await axios.post('http://localhost:8001/get-interview-data', { name });
+            const res = await axios.post(`${API_BASE_URL}/get-interview-data`, { name });
             if (res.data.error) {
                 setError(res.data.error);
             } else {
@@ -154,7 +156,7 @@ function App() {
         setExpandedQuestionIndex(null);
         try {
             const existing = data.questions.map(q => q.question);
-            const res = await axios.post('http://localhost:8001/fetch-more-questions', {
+            const res = await axios.post(`${API_BASE_URL}/fetch-more-questions`, {
                 name: selectedCompany,
                 existing: existing
             });
@@ -178,7 +180,7 @@ function App() {
         setLoading(true);
         setUserAnswers({});
         try {
-            const res = await axios.post('http://localhost:8001/generate-mock-test', { name: selectedCompany });
+            const res = await axios.post(`${API_BASE_URL}/generate-mock-test`, { name: selectedCompany });
             setMockTest(res.data.quiz);
             setActiveTab('mock');
         } catch (err) {
@@ -838,7 +840,7 @@ function App() {
                                                         try {
                                                             const formData = new FormData();
                                                             formData.append('file', file);
-                                                            const res = await axios.post('http://localhost:8001/score-resume', formData, {
+                                                            const res = await axios.post(`${API_BASE_URL}/score-resume`, formData, {
                                                                 headers: { 'Content-Type': 'multipart/form-data' }
                                                             });
                                                             setResumeData(res.data);
