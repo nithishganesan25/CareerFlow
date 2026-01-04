@@ -238,8 +238,8 @@ function App() {
 
     return (
         <div className="layout-grid font-sans text-sm">
-            {/* Sidebar */}
-            <aside className="bg-[#131316] p-6 flex flex-col h-screen sticky top-0 border-r border-[#27272a]">
+            {/* Desktop Sidebar */}
+            <aside className="sidebar-desktop bg-[#131316] p-6 flex flex-col h-screen sticky top-0 border-r border-[#27272a]">
                 <div className="mb-10 pl-2">
                     <h1 className="text-xl font-bold tracking-tight">CareerFlow</h1>
                 </div>
@@ -274,54 +274,65 @@ function App() {
             </aside>
 
             {/* Main Content */}
-            <main className="bg-[#18181b] min-h-screen flex flex-col">
-                <header className="p-6 flex items-center justify-between gap-6 sticky top-0 z-40 bg-[#18181b]/95 backdrop-blur-md border-b border-[#27272a]">
-                    <div className="relative flex-1 max-w-2xl group">
-                        <div className={`absolute inset-0 bg-[#8b5cf6]/5 rounded-xl blur-xl transition-opacity ${searchQuery ? 'opacity-100' : 'opacity-0'}`} />
-                        <Search className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${searchQuery ? 'text-[#8b5cf6]' : 'text-[#a1a1aa]'}`} size={18} />
-                        <input
-                            type="text"
-                            value={searchQuery}
-                            onChange={handleTypeahead}
-                            onKeyDown={handleSearch}
-                            onFocus={() => searchQuery && setShowSuggestions(true)}
-                            placeholder="Search companies or ask AI anything..."
-                            className="w-full bg-[#1c1c21] border border-[#27272a] rounded-xl py-3 pl-12 pr-4 text-white focus:ring-1 focus:ring-[#8b5cf6]/50 focus:border-[#8b5cf6]/50 shadow-lg placeholder:text-[#52525b] transition-all relative z-10"
-                        />
-                        <AnimatePresence>
-                            {showSuggestions && suggestions.length > 0 && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: 10 }}
-                                    className="absolute left-0 right-0 top-full mt-2 bg-[#1c1c21] border border-[#27272a] rounded-2xl shadow-2xl overflow-hidden z-50 p-2"
-                                >
-                                    <div className="px-3 py-2 text-[10px] font-bold text-[#52525b] uppercase tracking-widest">Jump to Company</div>
-                                    {suggestions.map((company, i) => (
-                                        <button
-                                            key={i}
-                                            onClick={() => {
-                                                setSearchQuery('');
-                                                setShowSuggestions(false);
-                                                fetchCompanyData(company.name);
-                                            }}
-                                            className="w-full text-left px-4 py-3 rounded-xl hover:bg-[#8b5cf6]/10 group flex items-center justify-between transition-colors"
-                                        >
-                                            <div className="flex items-center gap-3">
-                                                <div className="w-8 h-8 rounded-lg bg-[#27272a] flex items-center justify-center group-hover:bg-[#8b5cf6]/20 transition-colors">
-                                                    <Building2 size={16} className="text-[#a1a1aa] group-hover:text-[#8b5cf6]" />
+            <main className="bg-[#18181b] min-h-screen flex flex-col pb-20 lg:pb-0">
+                <header className="sticky top-0 z-40 bg-[#131316]/95 backdrop-blur-md border-b border-[#27272a]">
+                    {/* Mobile Branding Bar */}
+                    <div className="lg:hidden p-4 flex items-center justify-between">
+                        <h1 className="text-lg font-bold">CareerFlow</h1>
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#8b5cf6] to-[#d946ef] flex items-center justify-center text-[10px] font-bold text-white">
+                            {user?.email?.charAt(0).toUpperCase()}
+                        </div>
+                    </div>
+
+                    {/* Search Bar - Responsive Padding */}
+                    <div className="p-4 lg:p-6 flex items-center justify-between gap-6">
+                        <div className="relative flex-1 max-w-2xl group">
+                            <div className={`absolute inset-0 bg-[#8b5cf6]/5 rounded-xl blur-xl transition-opacity ${searchQuery ? 'opacity-100' : 'opacity-0'}`} />
+                            <Search className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${searchQuery ? 'text-[#8b5cf6]' : 'text-[#a1a1aa]'}`} size={18} />
+                            <input
+                                type="text"
+                                value={searchQuery}
+                                onChange={handleTypeahead}
+                                onKeyDown={handleSearch}
+                                onFocus={() => searchQuery && setShowSuggestions(true)}
+                                placeholder="Search companies..."
+                                className="w-full bg-[#1c1c21] border border-[#27272a] rounded-xl py-2.5 lg:py-3 pl-12 pr-4 text-white focus:ring-1 focus:ring-[#8b5cf6]/50 shadow-lg placeholder:text-[#52525b] transition-all relative z-10 text-sm"
+                            />
+                            <AnimatePresence>
+                                {showSuggestions && suggestions.length > 0 && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: 10 }}
+                                        className="absolute left-0 right-0 top-full mt-2 bg-[#1c1c21] border border-[#27272a] rounded-2xl shadow-2xl overflow-hidden z-50 p-2"
+                                    >
+                                        <div className="px-3 py-2 text-[10px] font-bold text-[#52525b] uppercase tracking-widest">Jump to Company</div>
+                                        {suggestions.map((company, i) => (
+                                            <button
+                                                key={i}
+                                                onClick={() => {
+                                                    setSearchQuery('');
+                                                    setShowSuggestions(false);
+                                                    fetchCompanyData(company.name);
+                                                }}
+                                                className="w-full text-left px-4 py-3 rounded-xl hover:bg-[#8b5cf6]/10 group flex items-center justify-between transition-colors"
+                                            >
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-8 h-8 rounded-lg bg-[#27272a] flex items-center justify-center group-hover:bg-[#8b5cf6]/20 transition-colors">
+                                                        <Building2 size={16} className="text-[#a1a1aa] group-hover:text-[#8b5cf6]" />
+                                                    </div>
+                                                    <div>
+                                                        <div className="text-sm font-medium text-white group-hover:text-[#8b5cf6]">{company.name}</div>
+                                                        <div className="text-[10px] text-[#52525b] uppercase">{company.category}</div>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <div className="text-sm font-medium text-white group-hover:text-[#8b5cf6]">{company.name}</div>
-                                                    <div className="text-[10px] text-[#52525b] uppercase">{company.category}</div>
-                                                </div>
-                                            </div>
-                                            <ArrowRight size={14} className="text-[#27272a] group-hover:text-[#8b5cf6] transition-transform -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100" />
-                                        </button>
-                                    ))}
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
+                                                <ArrowRight size={14} className="text-[#27272a] group-hover:text-[#8b5cf6] transition-transform -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100" />
+                                            </button>
+                                        ))}
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
                     </div>
                 </header>
 
@@ -335,16 +346,16 @@ function App() {
                                 exit={{ opacity: 0, y: -10 }}
                                 className="space-y-8 pt-6"
                             >
-                                <div className="flex items-center justify-between">
-                                    <h2 className="text-3xl font-bold">Companies</h2>
-                                    <button onClick={handleRequestCompany} className="btn-primary">
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                    <h2 className="text-2xl lg:text-3xl font-bold">Companies</h2>
+                                    <button onClick={handleRequestCompany} className="btn-primary w-fit">
                                         <Plus size={18} />
                                         Request Company
                                     </button>
                                 </div>
 
-                                <div className="flex items-center justify-between">
-                                    <div className="flex gap-2 bg-[#202025] p-1 rounded-xl border border-[#27272a]">
+                                <div className="flex items-center justify-start overflow-x-auto pb-2 scrollbar-none">
+                                    <div className="flex gap-2 bg-[#202025] p-1 rounded-xl border border-[#27272a] shrink-0">
                                         {['All', 'Service', 'Product'].map(cat => (
                                             <button
                                                 key={cat}
@@ -1018,6 +1029,31 @@ function App() {
                     </motion.div>
                 )}
             </AnimatePresence >
+
+            {/* Mobile Bottom Navigation */}
+            <nav className="bottom-nav">
+                <button
+                    onClick={() => { setView('dashboard'); setSelectedCompany(null); }}
+                    className={`flex flex-col items-center gap-1 transition-colors ${view === 'dashboard' || view === 'company' || view === 'search' ? 'text-[#8b5cf6]' : 'text-[#a1a1aa]'}`}
+                >
+                    <LayoutDashboard size={20} />
+                    <span className="text-[10px] font-bold">Home</span>
+                </button>
+                <button
+                    onClick={() => setView('resume')}
+                    className={`flex flex-col items-center gap-1 transition-colors ${view === 'resume' ? 'text-[#8b5cf6]' : 'text-[#a1a1aa]'}`}
+                >
+                    <PieChart size={20} />
+                    <span className="text-[10px] font-bold">Audit</span>
+                </button>
+                <button
+                    onClick={() => setView('settings')}
+                    className={`flex flex-col items-center gap-1 transition-colors ${view === 'settings' ? 'text-[#8b5cf6]' : 'text-[#a1a1aa]'}`}
+                >
+                    <Settings size={20} />
+                    <span className="text-[10px] font-bold">Settings</span>
+                </button>
+            </nav>
 
         </div >
     );
