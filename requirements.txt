@@ -6,3 +6,4 @@ langchain-community
 chromadb
 google-generativeai
 duckduckgo-search
+python-multipart
