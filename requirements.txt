@@ -7,3 +7,6 @@ langchain-community
 chromadb
 google-generativeai
 duckduckgo-search
+PyPDF2
+python-multipart
+requests
