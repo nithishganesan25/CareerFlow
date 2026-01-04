@@ -27,7 +27,7 @@ import axios from 'axios';
 import Login from './Login';
 import { auth, logOut, onAuthChange, updateUserProfile } from './firebase';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8001';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://careerflow-nbvo.onrender.com';
 
 // Mock data to enrich the company cards (simulating the design)
 const COMPANIES = [

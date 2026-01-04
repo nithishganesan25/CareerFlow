@@ -31,9 +31,9 @@ You will need to push your current code to GitHub.
 *   Link: https://github.com/nithishganesan25/CareerFlow.git
 
 ## 6. MVP Link
-*   **Option A (Fastest):** Use **Ngrok** to expose your local server temporarily.
-*   **Option B (Better):** Deploy Frontend to **Vercel** and Backend to **Render** or **Railway**.
-*   [Paste your link here]
+*   **Backend API**: https://careerflow-nbvo.onrender.com
+*   **Frontend (Local)**: http://localhost:3000
+*   **Note**: For the final submission, deploy the frontend to Vercel and paste that link here.
 
 ---
 
