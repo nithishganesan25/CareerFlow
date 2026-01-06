@@ -2,9 +2,6 @@ fastapi
 uvicorn
 pydantic
 python-dotenv
-langchain
-langchain-community
-chromadb
 google-generativeai
 duckduckgo-search
 PyPDF2
